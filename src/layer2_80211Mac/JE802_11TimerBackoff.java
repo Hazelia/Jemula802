@@ -86,8 +86,7 @@ public final class JE802_11TimerBackoff extends JETimer {
 		this.theStartTime = theUniqueEventScheduler.now();
 		// calculate backoff
 		this.theRandomVar = new JERandomVar(theUniqueRandomGenerator, "Uniform", 0.0, this.theCW / 2.0);
-
-		this.theRemainingInterval = this.aSlotTime.times((double) Math.round(this.theRandomVar.nextvalue()));
+		this.theRemainingInterval = this.aSlotTime.times((long)this.theRandomVar.nextvalue());
 		int aRemainingWindow = (int) this.theRemainingInterval.dividedby(this.aSlotTime);
 		this.theRemainingInterval = this.aSlotTime.times(aRemainingWindow);
 		JETime aCWInterval = this.aSlotTime.times(this.theCW);

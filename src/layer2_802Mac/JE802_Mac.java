@@ -60,7 +60,7 @@ public abstract class JE802_Mac extends JEEventHandler {
 
 	protected final XPath xpath = XPathFactory.newInstance().newXPath();
 
-	protected JETime currentTransmissionEnd = new JETime(-1);
+	protected JETime currentTransmissionEnd = new JETime(-1.0);
 
 	protected final JE802StatEval statEval;
 

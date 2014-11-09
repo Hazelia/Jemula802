@@ -36,11 +36,11 @@ JE802IChannelManager {
 
 	private int fixedChannel;
 
-	private JETime fixedSwitchingUntil = new JETime(0);
+	private JETime fixedSwitchingUntil = new JETime(0.0);
 
 	private int switchableChannel;
 
-	private JETime switchingUntil = new JETime(0);
+	private JETime switchingUntil = new JETime(0.0);
 
 	// current state, broadcasting or uni casting, broadcast packets have
 	// priority
@@ -241,7 +241,7 @@ JE802IChannelManager {
 			if (state instanceof JEBroadcastState) {
 				JEBroadcastState broadState = (JEBroadcastState) state;
 				if (broadState.getBroadcastStart().isEarlierThan(
-						theUniqueEventScheduler.now().minus(new JETime(20)))) {
+						theUniqueEventScheduler.now().minus(new JETime(20.0)))) {
 					this.state = new JEUnicastState();
 					this.state.sendPacket(packet, nextHop);
 				}

@@ -30,7 +30,7 @@ public class JE802Backoff extends JE802Drawable {
 		if (context.backoffs_are_wanted) {
 			JETime aStart = this.aTime;
 			Rectangle rect = new Rectangle();
-			double X = aStart.getTime();
+			double X = aStart.getTimeMs();
 			X = X * context.thePixel_per_ms - context.thePanel_min_ms * context.thePixel_per_ms;
 			rect.x = (int) Math.round(X);
 
@@ -44,8 +44,8 @@ public class JE802Backoff extends JE802Drawable {
 			rect.height = y_top - y_bottom;
 			rect.y = y_bottom;
 
-			double W = dur.getTime();
-			double CW = cwTime.getTime();
+			double W = dur.getTimeMs();
+			double CW = cwTime.getTimeMs();
 
 			W = W * context.thePixel_per_ms;
 			if (W < 1.0) {

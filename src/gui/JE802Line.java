@@ -18,7 +18,7 @@ public class JE802Line extends JE802Drawable {
 	@Override
 	public void draw(Graphics g, JE802GuiContext context) {
 		Rectangle rect = new Rectangle();
-		double X = this.aTime.getTime();
+		double X = this.aTime.getTimeMs();
 		X = X * context.thePixel_per_ms - context.thePanel_min_ms * context.thePixel_per_ms;
 		rect.x = (int) Math.round(X) - 1;
 		rect.height = new Double(context.thePixel_per_Station).intValue();

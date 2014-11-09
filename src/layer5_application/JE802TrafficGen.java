@@ -249,7 +249,7 @@ public class JE802TrafficGen extends JEEventHandler {
 				this.error("unknown type of traffic: " + this.type);
 			}
 		} else if (anEventName.equals("stop_req")) {
-			if (now.isLaterThan(new JETime(0))) {
+			if (now.isLaterThan(new JETime(0.0))) {
 				stopped = true;
 			}
 		} else if (anEventName.equals("eval_start_req")) {

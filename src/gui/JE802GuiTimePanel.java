@@ -286,7 +286,7 @@ public class JE802GuiTimePanel extends JPanel implements KeyListener, MouseWheel
 	}
 
 	public void updateIndexMap(JETime time) {
-		int aTime = (int) time.getTime();
+		int aTime = (int) time.getTimeMs();
 		int diff = aTime - this.lastTime;
 		if (diff > 1) {
 			for (int i = this.lastTime + 1; i < aTime; i++) {

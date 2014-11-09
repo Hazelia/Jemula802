@@ -99,7 +99,7 @@ public class JE802Mobility extends JEmula {
 				this.interpolationInterval_ms = new JETime(new Double(interpolationIntervalStr));
 			} else {
 				warning ("missing interpolationInterval_ms. Using default 3000ms.");
-				this.interpolationInterval_ms = new JETime(3000);
+				this.interpolationInterval_ms = new JETime(3000.0);
 			}
 
 			if (this.mobile == true) {
@@ -110,7 +110,7 @@ public class JE802Mobility extends JEmula {
 					if (!traceStartOffset.isEmpty()) {
 						this.offsetTime_ms = new JETime(new Double(traceStartOffset));
 					} else {
-						this.offsetTime_ms = new JETime(0);
+						this.offsetTime_ms = new JETime(0.0);
 					}
 					JE802TraceParser parser = new JE802MobilitySimTraceParser(traceFile, this.offsetTime_ms);
 					// sorted by time
@@ -120,7 +120,7 @@ public class JE802Mobility extends JEmula {
 
 				} else {
 					// locations = new ArrayList<JE802LocationInfo>();
-					this.interpolationInterval_ms = new JETime(1000);
+					this.interpolationInterval_ms = new JETime(1000.0);
 				}
 			}
 		} else {
@@ -131,7 +131,7 @@ public class JE802Mobility extends JEmula {
 	public JETime getTraceStartTime() {
 		if (mobile && !locations.isEmpty()) {
 			if (locations.get(0).getTime().getTimeMs() < 0) {
-				return new JETime(0);
+				return new JETime(0.0);
 			} else {
 				return locations.get(0).getTime();
 			}

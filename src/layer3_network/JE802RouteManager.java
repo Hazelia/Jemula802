@@ -400,7 +400,7 @@ public class JE802RouteManager extends JEEventHandler {
 
 	}
 
-	private JETime lastKillEvent = new JETime(-10000);
+	private JETime lastKillEvent = new JETime(-10000.0);
 
 	private void handleRREP(JE802RREPPacket packet, JE802HopInfo lastHop) {
 		JE802RREPPacket rrep = new JE802RREPPacket(packet);
@@ -426,11 +426,11 @@ public class JE802RouteManager extends JEEventHandler {
 			}
 
 			JETime now = theUniqueEventScheduler.now();
-			if (JE802RoutingConstants.MCRMetricEnabled && lastKillEvent.isEarlierEqualThan(now.minus(new JETime(2000)))) {
+			if (JE802RoutingConstants.MCRMetricEnabled && lastKillEvent.isEarlierEqualThan(now.minus(new JETime(2000.0)))) {
 				lastKillEvent = now;
 				Vector<Object> parameterList = new Vector<Object>();
 				parameterList.add(rrep.getSA());
-				this.send(new JEEvent("killRoute", this.getHandlerId(), now.plus(new JETime(2000)), parameterList));
+				this.send(new JEEvent("killRoute", this.getHandlerId(), now.plus(new JETime(2000.0)), parameterList));
 			}
 			// packet is a hello message
 		} else if (rrep.getDA().getAddress() == 255) {

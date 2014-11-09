@@ -122,8 +122,8 @@ public class JE802_11Phy extends JE802Phy {
 			this.error("Construction of JE802Phy did not receive JE802Phy xml node");
 		}
 
-		this.emulationEnd = new JETime(10000);
-		this.halfDuration = this.emulationEnd.times(0.5);
+		this.emulationEnd = new JETime(10000.0);
+		this.halfDuration = new JETime(this.emulationEnd.dividedby(new JETime(2)));
 	}
 
 	/*
@@ -243,8 +243,8 @@ public class JE802_11Phy extends JE802Phy {
 				this.currentChannelNumber = (Integer) anEvent
 						.getParameterList().elementAt(0);
 				this.concurrentRx = 0;
-				this.currentRxEnd = new JETime(-1);
-				this.currentTxEnd = new JETime(-1);
+				this.currentRxEnd = new JETime(-1.0);
+				this.currentTxEnd = new JETime(-1.0);
 				this.parameterlist.clear();
 				this.parameterlist.add(this);
 				this.parameterlist.add(from);

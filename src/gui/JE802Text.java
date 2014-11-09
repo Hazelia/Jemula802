@@ -16,7 +16,7 @@ public class JE802Text extends JE802Drawable {
 
 	@Override
 	public void draw(Graphics g, JE802GuiContext context) {
-		double X = aTime.getTime();
+		double X = aTime.getTimeMs();
 		X = X * context.thePixel_per_ms - context.thePanel_min_ms * context.thePixel_per_ms;
 		int aXPos = (int) Math.round(X) - 4;
 		int aYPos = aSta * new Double(context.thePixel_per_Station + context.thePixel_between_Stations).intValue() + 2;

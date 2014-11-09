@@ -75,9 +75,9 @@ public abstract class JE802Phy extends JEEventHandler {
 
 	protected boolean useBasicModes;
 
-	protected JETime currentTxEnd = new JETime(-1);
+	protected JETime currentTxEnd = new JETime(-1.0);
 
-	protected JETime currentRxEnd = new JETime(-1);
+	protected JETime currentRxEnd = new JETime(-1.0);
 
 	protected enum state {
 		idle, active, active_sync

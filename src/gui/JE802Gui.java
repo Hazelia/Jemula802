@@ -156,7 +156,7 @@ public class JE802Gui extends JFrame {
 		 * == 1) { } else if (this.jTabbedPane.getSelectedIndex() == 2) { }
 		 * return 0;
 		 */
-		int time = (int) aStart.plus(aDur).getTime();
+		int time = (int) aStart.plus(aDur).getTimeMs();
 		if (time > this.scrollBarMax) {
 			this.scrollBarMax = time;
 			this.scrollBar.setMaximum(time);

@@ -248,7 +248,7 @@ public class JE802Control extends JEmula {
 			double interval = new Integer(helloIntervalStr);
 			JE802RoutingConstants.HELLO_INTERVAL_MS = new JETime(interval);
 		} else {
-			JE802RoutingConstants.HELLO_INTERVAL_MS = new JETime(2000);
+			JE802RoutingConstants.HELLO_INTERVAL_MS = new JETime(2000.0);
 		}
 
 		String channelDelayStr = routingParameters
@@ -257,7 +257,7 @@ public class JE802Control extends JEmula {
 			double delay = new Double(channelDelayStr);
 			JE802RoutingConstants.CHANNEL_SWITCHING_DELAY = new JETime(delay);
 		} else {
-			JE802RoutingConstants.CHANNEL_SWITCHING_DELAY = new JETime(1);
+			JE802RoutingConstants.CHANNEL_SWITCHING_DELAY = new JETime(1.0);
 		}
 	}
 

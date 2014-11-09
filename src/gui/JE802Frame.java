@@ -30,13 +30,13 @@ public class JE802Frame extends JE802Drawable {
 		if (context.frames_are_wanted | context.frame_lines_are_wanted) {
 			Rectangle rect = new Rectangle();
 			JETime aStart = this.aTime;
-			double X = aStart.getTime();
+			double X = aStart.getTimeMs();
 			X = X * context.thePixel_per_ms - context.thePanel_min_ms * context.thePixel_per_ms;
 			rect.x = (int) Math.round(X);
 			rect.y = 2 + aSta * new Double(context.thePixel_per_Station + context.thePixel_between_Stations).intValue();
 			rect.height = new Double(context.thePixel_per_Station).intValue() - 4;
 
-			double W = dur.getTime();
+			double W = dur.getTimeMs();
 
 			W = W * context.thePixel_per_ms;
 			if (W < 1.0) {

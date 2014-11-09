@@ -16,9 +16,9 @@ public final class JE802RoutingConstants {
 
 	public static int maxTTL = 5;
 
-	public static JETime ACTIVE_ROUTE_TIMEOUT = new JETime(3000);
+	public static JETime ACTIVE_ROUTE_TIMEOUT = new JETime(3000.0);
 
-	public static JETime PATH_DISCOVERY_TIME = new JETime(3000);
+	public static JETime PATH_DISCOVERY_TIME = new JETime(3000.0);
 
 	// period after wich an invalid route is deleted from the routing table
 	public static JETime DELETE_PERIOD = ACTIVE_ROUTE_TIMEOUT.times(5);
@@ -29,14 +29,14 @@ public final class JE802RoutingConstants {
 	// after how many lost packets a link is considered as broken
 	public static int LINK_BREAK_AFTER_LOSS = 10;
 
-	public static JETime HELLO_INTERVAL_MS = new JETime(2000);
+	public static JETime HELLO_INTERVAL_MS = new JETime(2000.0);
 
 	// Multi channel routing parameters
 
 	// delay needed for switching an interface to a new channel
-	public static JETime CHANNEL_SWITCHING_DELAY = new JETime(1);
+	public static JETime CHANNEL_SWITCHING_DELAY = new JETime(1.0);
 
-	public static JETime MAX_SWITCHING_INTERVAL = new JETime(50);// CHANNEL_SWITCHING_DELAY.times(10);
+	public static JETime MAX_SWITCHING_INTERVAL = new JETime(50.0);// CHANNEL_SWITCHING_DELAY.times(10);
 
 	public static int RREQ_RATE_LIMIT = 20;
 

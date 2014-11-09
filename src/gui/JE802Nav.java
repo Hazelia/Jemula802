@@ -18,9 +18,9 @@ public class JE802Nav extends JE802Drawable {
 	public void draw(Graphics g, JE802GuiContext context) {
 		if (context.navs_are_wanted) {
 			JETime aStart = aTime;
-			double X = aStart.getTime();
+			double X = aStart.getTimeMs();
 			X = X * context.thePixel_per_ms - context.thePanel_min_ms * context.thePixel_per_ms;
-			double W = dur.getTime();
+			double W = dur.getTimeMs();
 			W = W * context.thePixel_per_ms;
 			if (W < 1.0) {
 				W = 1.0;
