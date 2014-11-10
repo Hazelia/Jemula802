@@ -74,8 +74,6 @@ public class JE802_11Phy extends JE802Phy {
 
 	private JETime PLCPHeaderDuration;
 
-	private JETime emulationEnd, halfDuration;
-
 	public JE802_11Phy(JEEventScheduler aScheduler, JE802StatEval statEval,
 			Random aGenerator, JEWirelessMedium aChannel, JE802Gui aGui,
 			Node aTopLevelNode) throws XPathExpressionException {
@@ -122,8 +120,6 @@ public class JE802_11Phy extends JE802Phy {
 			this.error("Construction of JE802Phy did not receive JE802Phy xml node");
 		}
 
-		this.emulationEnd = new JETime(10000.0);
-		this.halfDuration = new JETime(this.emulationEnd.dividedby(new JETime(2)));
 	}
 
 	/*
@@ -318,22 +314,6 @@ public class JE802_11Phy extends JE802Phy {
 						.plus(aMpdu.getTxTime()), this.parameterlist));
 
 			} else if (anEventName.equals("location_update")) {
-				this.parameterlist = new Vector<Object>();
-				this.parameterlist.add(this);
-				this.send(new JEEvent("location_update_req",
-						this.theUniqueRadioChannel.getHandlerId(), now,
-						parameterlist));
-				if (this.theMac.getMacAddress() == 2) {
-					if (now.isEarlierEqualThan(this.halfDuration)) {
-						this.mobility
-								.setXLocation(this.mobility.getXLocation() + 0.005);
-					} else {
-						this.mobility
-								.setXLocation(this.mobility.getXLocation() - 0.005);
-					}
-				}
-				this.send(new JEEvent("location_update", this, now
-						.plus(mobility.getInterpolationInterval_ms())));
 
 			} else if (anEventName.equals("start_req")) {
 				// ignore
