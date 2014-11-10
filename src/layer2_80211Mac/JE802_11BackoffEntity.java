@@ -125,8 +125,6 @@ public final class JE802_11BackoffEntity extends JEEventHandler {
 	private int noAckCount = 0;
 	int debugCount = 0;
 
-	// long previuosDiscarded=0;
-
 	private enum txState {
 		idle, txRts, txAck, txCts, txData
 	}
@@ -502,7 +500,6 @@ public final class JE802_11BackoffEntity extends JEEventHandler {
 				receiveData();
 				break;
 			case ack:
-				discardedCounter = 0;
 				this.message("Station " + this.theMac.getMacAddress()
 						+ " received ACK " + this.theMpduRx.getSeqNo()
 						+ "from Station " + this.theMpduRx.getSA()
