@@ -1,0 +1,1 @@
+java -Xmx500m -classpath "Jemula802/bin:Jemula/bin:Jemula/lib/xstream-1.3.1.jar:Jemula/lib/jfreechart-1.0.19.jar:Jemula/lib/jcommon-1.0.23.jar:" emulator.JE802Starter "/Users/smangold/git/Jemula802/scenarios/ETH_Course/MobComp2014_assignment03_test_only_two.xml"
