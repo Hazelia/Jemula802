@@ -73,7 +73,7 @@ public class JE802Backoff extends JE802Drawable {
 				int aYPos = rect.y - 3;
 				g.setColor(Color.black);
 				g.setFont(new Font("Arial", 1, g.getFont().getSize() - 4));
-				g.drawString(window + "[" + cw + "]", aXPos, aYPos);
+				g.drawString(window + " (" + cw + ") " + aStart.toString(), aXPos, aYPos);
 				g.setFont(new Font("Verdana", 1, g.getFont().getSize() + 4));
 			}
 		}

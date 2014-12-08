@@ -316,7 +316,6 @@ public final class JE802_11BackoffEntity extends JEEventHandler {
 			// receive an ack frame
 			this.theTxState = txState.idle;
 			collisionCount++;
-
 			this.retryData();
 		} else if (this.theTxState == txState.txCts) {
 			this.theTxState = txState.idle;
@@ -422,8 +421,8 @@ public final class JE802_11BackoffEntity extends JEEventHandler {
 		if (this.theMpduCtrl != null) {
 			if (this.theBackoffTimer.is_idle()
 					& this.theInterFrameSpaceTimer.is_idle()) {
-				this.message("Station " + this.theMac.getMacAddress()
-						+ " backoff error?", 10);
+				this.warning("Station " + this.theMac.getMacAddress()
+						+ " backoff error?");
 				return;
 			}
 		}
@@ -436,27 +435,33 @@ public final class JE802_11BackoffEntity extends JEEventHandler {
 	}
 
 	private void event_interframespace_expired_ind(JEEvent anEvent) {
-		if ((this.theMpduCtrl == null) && (this.theMpduRts == null)
-				&& (this.theMpduData == null)) {
-			this.keep_going();
-		} else {
+//		if ((this.theMpduCtrl == null) && (this.theMpduRts == null)
+//				&& (this.theMpduData == null)) {
+//			//this.keep_going();
+//		} else {
 			if (this.checkAndTxCTRL()) {
 			} else {
 				if (this.theBackoffTimer.is_active()) {
-					this.message(
-							"Station "
-									+ this.theMac.getMacAddress()
-									+ " defer problem (possibly due to hidden station): backoff active while AIFS or any other IFS",
-									10);
+					this.message("Station " + this.theMac.getMacAddress()
+							+ " defer problem (possibly due to hidden station): backoff active while AIFS or any other IFS",10);
 				} else {
 					if (this.checkAndTxRTS(true)) {
+//						theUniqueGui.addLine(theUniqueEventScheduler.now(),
+//								this.theMac.getMacAddress(), this.theAC+3, "magenta",
+//								1);
 					} else {
 						if (this.checkAndTxDATA(true)) {
+//							theUniqueGui.addLine(theUniqueEventScheduler.now(),
+//									this.theMac.getMacAddress(), this.theAC+2, "magenta",
+//									1);
 						}
 					}
+//					theUniqueGui.addLine(theUniqueEventScheduler.now(),
+//							this.theMac.getMacAddress(), this.theAC, "blue",
+//							1);
 				}
 			}
-		}
+//		}
 	}
 
 	private void event_nav_expired_ind(JEEvent anEvent) {
@@ -464,21 +469,16 @@ public final class JE802_11BackoffEntity extends JEEventHandler {
 	}
 
 	private void keep_going() {
-		if (this.theBackoffTimer.is_paused() && !this.busy()) { // now let us
-			// continue our
-			// own backoff
+		if (this.theBackoffTimer.is_paused() && !this.busy()) { // now let us continue our own backoff
 			this.deferForIFS();
 		} else { // or check next Mpdu
 			this.nextMpdu();
 		}
 	}
 
-	private void event_PHY_RxEnd_ind(JEEvent anEvent) { // received packet
-		// completely or
-		// collision occurred
-
+	private void event_PHY_RxEnd_ind(JEEvent anEvent) {
+		// received packet completely or collision occurred
 		this.parameterlist = anEvent.getParameterList();
-
 		if (this.parameterlist.elementAt(0) == null) { // bad luck: no packet at
 			// all, just garbage
 			this.theMpduRx = null;
@@ -543,8 +543,8 @@ public final class JE802_11BackoffEntity extends JEEventHandler {
 						.getHandlerId(), theUniqueEventScheduler.now().plus(
 								this.theSlotTime)));
 			} else {
-				this.deferForIFS();
-				// this.theBackoffTimer.resume();
+				//this.deferForIFS();
+				this.theBackoffTimer.resume();
 			}
 		} else if (this.theBackoffTimer.is_active() && busy) {
 			this.theBackoffTimer.pause();
@@ -886,8 +886,7 @@ public final class JE802_11BackoffEntity extends JEEventHandler {
 
 	private void deferForIFS() {
 		if (!this.theInterFrameSpaceTimer.is_active()) { // ignore during
-			// interframe space
-			// defering interval
+			// interframe space defering interval
 			if (this.theMpduCtrl != null) { // CTS or ACK required
 				this.theInterFrameSpaceTimer.start(this.theSIFS);
 			} else if (this.theMpduRts != null) {
@@ -897,36 +896,20 @@ public final class JE802_11BackoffEntity extends JEEventHandler {
 			} else if (this.theMpduData != null) {
 				if (!this.theBackoffTimer.is_active()) {
 					if (this.theTxState == txState.txRts) {
-						this.theInterFrameSpaceTimer.start(this.theSIFS); // we
-						// sent
-						// RTS
-						// before
-						// and
-						// just
-						// received
-						// CTS.
-						// Now
-						// SIFS
-						// is
-						// used
-						// before
-						// DATA,
-						// not
-						// AIFS
+						this.theInterFrameSpaceTimer.start(this.theSIFS);
+						// we sent RTS before and just received CTS.
+						// Now SIFS is used before DATA, not AIFS
 					} else {
 						this.theInterFrameSpaceTimer.start(this.theAIFS);
 					}
 				} else { // backoff is busy. Do nothing though data is pending.
-					this.message(
-							"Station "
-									+ this.theMac.getMacAddress()
-									+ " deferForIFS: doing nothing though data is pending: backoff timer already busy.",
-									10);
+					this.message("Station " + this.theMac.getMacAddress() + " deferForIFS: doing nothing though data is pending: backoff timer already busy.", 10);
 				}
 			} else { // the transmission was successful.
 				this.theTxState = txState.idle;
 				this.nextMpdu(); // now check for next MPDU
 			}
+		} else {
 		}
 	}
 
@@ -937,14 +920,8 @@ public final class JE802_11BackoffEntity extends JEEventHandler {
 				theUniqueEventScheduler.now())
 				|| this.theMac.getPhy().isCcaBusy()
 				|| this.theInterFrameSpaceTimer.is_active()) {
-			// theUniqueGui.addLine(theUniqueEventScheduler.now(),
-			// this.theMac.getMacAddress(), this.theAC-1, "red",
-			// this.theMac.getPhy().getChannel());
 			return true;
 		} else {
-			// theUniqueGui.addLine(theUniqueEventScheduler.now(),
-			// this.theMac.getMacAddress(), this.theAC-1, "green",
-			// this.theMac.getPhy().getChannel());
 			return false;
 		}
 	}
